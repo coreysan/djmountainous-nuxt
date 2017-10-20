@@ -1,0 +1,920 @@
+@import "variables";
+@import "mixins";
+
+body {
+    width: 100%;
+    height: 100%;
+    color: white;
+    background-color: black;
+}
+
+html {
+  width: 100%;
+  height: 100%;
+}
+
+//fonts
+body,
+{
+  font-family: "Lora","Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+
+h1,h2,h3,h4,h5,h6,
+.mix,
+.navbar-custom,
+.btn,
+.downloads,
+.bottom-bar {
+  font-family: "Montserrat","Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+
+
+h1,h2,h3,h4,h5,h6{
+  margin: 0 0 35px;
+  text-transform: uppercase;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: red;
+}
+
+
+
+p {
+    margin: 0 0 25px;
+    font-size: 18px;
+    line-height: 1.5;
+    @media(min-width:768px) {
+        margin: 0 0 35px;
+        font-size: 20px;
+        line-height: 1.6;
+    }
+}
+
+a {
+    color: $primary;
+    -webkit-transition: all .2s ease-in-out;
+    -moz-transition: all .2s ease-in-out;
+    transition: all .2s ease-in-out;
+    &:hover,
+    &:focus {
+        text-decoration: none;
+        color: darken($primary,20%);
+    }
+}
+
+.light {
+    font-weight: 400;
+}
+
+.navbar-custom {
+    margin-bottom: 0;
+    border-bottom: 1px solid rgba(white, 0.3);
+    text-transform: uppercase;
+    font-family: "Montserrat","Helvetica Neue",Helvetica,Arial,sans-serif;
+    background-color: black;
+    .navbar-toggle {
+        padding: 4px 6px;
+        font-size: 16px;
+        color: white;
+        &:focus,
+        &:active {
+            outline: none;
+        }
+    }
+    .navbar-brand {
+        font-weight: 700;
+        &:focus {
+            outline: none;
+        }
+    }
+    a {
+        color: white;
+    }
+    .nav {
+        li {
+            a {
+                -webkit-transition: background .3s ease-in-out;
+                -moz-transition: background .3s ease-in-out;
+                transition: background .3s ease-in-out;
+                &:hover {
+                    color: rgba(white, 0.8);
+                    outline: none;
+                    background-color: transparent;
+                }
+                &:focus,
+                &:active {
+                    outline: none;
+                    background-color: transparent;
+                }
+            }
+            &.active {
+                outline: none;
+                a {
+                    background-color: rgba(white, 0.3);
+                    &:hover {
+                        color: white;
+                    }
+                }
+            }
+        }
+    }
+    @media(min-width:768px) {
+      // padding: 20px 0;
+      border-bottom: 1px solid rgba(black, 0.3);;
+      letter-spacing: 1px;
+      // background: transparent;
+      -webkit-transition: background .5s ease-in-out,padding .5s ease-in-out, border .5s ease-in-out;
+      -moz-transition: background .5s ease-in-out,padding .5s ease-in-out, border .5s ease-in-out;
+      transition: background .5s ease-in-out,padding .5s ease-in-out, border .5s ease-in-out;
+      &.top-nav-collapse {
+          padding: 0;
+          background: black;
+          border-bottom: 1px solid rgba(white, 0.3);
+      }
+    }
+}
+
+.intro {
+    display: table;
+
+    position: relative;
+
+    margin-top: 50px;
+
+    width: 100%;
+    text-align: center;
+    color: white;
+
+    .intro-body {
+        display: table-cell;
+        vertical-align: middle;
+        .brand-heading {
+            font-size: 40px;
+        }
+        .intro-text {
+            font-size: 18px;
+        }
+    }
+    @media(min-width:768px) {
+      padding: 0;
+      .intro-body {
+        .brand-heading {
+          font-size: 100px;
+        }
+        .intro-text {
+          font-size: 26px;
+        }
+      }
+  }
+}
+
+.btn-circle {
+    width: 70px;
+    height: 70px;
+    margin-top: 15px;
+    padding: 7px 16px;
+    border: 2px solid white;
+    border-radius: 100% !important;
+    font-size: 40px;
+    color: white;
+    background: transparent;
+    -webkit-transition: background .3s ease-in-out;
+    -moz-transition: background .3s ease-in-out;
+    transition: background .3s ease-in-out;
+    &:hover,
+    &:focus {
+        outline: none;
+        color: white;
+        background: rgba(white, 0.1);
+    }
+    i.animated {
+        -webkit-transition-property: -webkit-transform;
+        -webkit-transition-duration: 1s;
+        -moz-transition-property: -moz-transform;
+        -moz-transition-duration: 1s;
+    }
+    &:hover {
+        i.animated {
+            -webkit-animation-name: pulse;
+            -moz-animation-name: pulse;
+            -webkit-animation-duration: 1.5s;
+            -moz-animation-duration: 1.5s;
+            -webkit-animation-iteration-count: infinite;
+            -moz-animation-iteration-count: infinite;
+            -webkit-animation-timing-function: linear;
+            -moz-animation-timing-function: linear;
+        }
+    }
+}
+
+@-webkit-keyframes pulse {
+    from {
+        -webkit-transform: scale(1);
+        transform: scale(1);
+    }
+
+    50% {
+        -webkit-transform: scale(1.2);
+        transform: scale(1.2);
+    }
+
+    100% {
+        -webkit-transform: scale(1);
+        transform: scale(1);
+    }
+}
+
+@-moz-keyframes pulse {
+    from {
+        -moz-transform: scale(1);
+        transform: scale(1);
+    }
+
+    50% {
+        -moz-transform: scale(1.2);
+        transform: scale(1.2);
+    }
+
+    100% {
+        -moz-transform: scale(1);
+        transform: scale(1);
+    }
+}
+
+.content-section {
+    padding-top: 100px;
+}
+
+.about-section {
+
+  position: relative;
+
+  width: 100%;
+  color: white;
+  background: url(/img/star-nebula-bg.jpg) no-repeat bottom center scroll;
+  background-color: black;
+
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  background-size: cover;
+  -o-background-size: cover;
+
+}
+
+.section-gradient{
+    position:absolute;
+    left: 0;
+    width: 100%;
+    height: 160px;
+    &.top-gradient{
+      top: 0;
+      background: -moz-linear-gradient(top,  rgba(0,0,0,1) 0%, rgba(0,0,0,0.02) 99%, rgba(0,0,0,0.01) 100%); /* FF3.6-15 */
+      background: -webkit-linear-gradient(top,  rgba(0,0,0,1) 0%,rgba(0,0,0,0.02) 99%,rgba(0,0,0,0.01) 100%); /* Chrome10-25,Safari5.1-6 */
+      background: linear-gradient(to bottom,  rgba(0,0,0,1) 0%,rgba(0,0,0,0.02) 99%,rgba(0,0,0,0.01) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+      filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#000000', endColorstr='#03000000',GradientType=0 ); /* IE6-9 */
+    }
+    &.bottom-gradient{
+      bottom: 0;
+      background: -moz-linear-gradient(top,  rgba(0,0,0,0.01) 0%, rgba(0,0,0,0.01) 1%, rgba(0,0,0,0.99) 99%, rgba(0,0,0,1) 100%); /* FF3.6-15 */
+      background: -webkit-linear-gradient(top,  rgba(0,0,0,0.01) 0%,rgba(0,0,0,0.01) 1%,rgba(0,0,0,0.99) 99%,rgba(0,0,0,1) 100%); /* Chrome10-25,Safari5.1-6 */
+      background: linear-gradient(to bottom,  rgba(0,0,0,0.01) 0%,rgba(0,0,0,0.01) 1%,rgba(0,0,0,0.99) 99%,rgba(0,0,0,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+      filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#03000000', endColorstr='#000000',GradientType=0 ); /* IE6-9 */
+    }
+  }
+
+.inside-about{
+  padding: 80px 0;
+}
+
+#map {
+    width: 100%;
+    height: 200px;
+    margin-top: 100px;
+}
+
+@media(min-width:767px) {
+    .content-section {
+        padding-top: 250px;
+    }
+
+    .inside-about {
+        padding: 240px 0;
+    }
+
+    #map {
+        height: 70px;
+        margin-top: 250px;
+    }
+}
+
+.btn {
+    text-transform: uppercase;
+    font-family: "Montserrat","Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-weight: 400;
+    -webkit-transition: all .3s ease-in-out;
+    -moz-transition: all .3s ease-in-out;
+    transition: all .3s ease-in-out;
+    border-radius: 0;
+}
+
+.btn-default {
+    border: 1px solid $primary;
+    color: $primary;
+    background-color: transparent;
+    &:hover,
+    &:focus {
+        border: 1px solid $primary;
+        outline: none;
+        color: black;
+        background-color: $primary;
+    }
+}
+
+ul.banner-social-buttons {
+  margin-top: 0;
+  margin-bottom: 10px;
+
+  li{
+    margin-bottom: 16px;
+  }
+
+  @media(max-width:1199px) {
+      margin-top: 15px;
+  }
+  @media(max-width:1000px) {
+    li {
+      display: block;
+      margin-bottom: 20px;
+      padding: 0;
+      &:last-child {
+          margin-bottom: 0;
+      }
+    }
+  }
+}
+
+footer {
+  padding: 50px 0;
+  p {
+      margin: 0;
+  }
+}
+
+::-moz-selection {
+    text-shadow: none;
+    background: #fcfcfc;
+    background: rgba(white, 0.2);
+}
+
+::selection {
+    text-shadow: none;
+    background: #fcfcfc;
+    background: rgba(white, 0.2);
+}
+
+img::selection {
+    background: transparent;
+}
+
+img::-moz-selection {
+    background: transparent;
+}
+
+body {
+    -webkit-tap-highlight-color: rgba(white, 0.2);
+}
+
+
+
+/* SNIPPETS */
+.deep-house{
+  color: $deep-house-color;
+}
+.progressive{
+  color: $progressive-color;
+}
+.drum-bass{
+  color: $drum-bass-color;
+}
+.dreamstep{
+  color: $dreamstep-color;
+}
+
+.subdued{
+  color: #999;
+}
+.more-subdued{
+  color: #bbb;
+}
+
+.way-subdued{
+  color: $way-subdued;
+}
+
+
+
+header .section-gradient{
+
+  height: 140px;
+}
+
+.content-section {
+  padding-top: 200px;
+  &#mixes{
+    padding-top: 40px;
+  }
+}
+
+#about.content-section {
+  padding-top: 110px;
+}
+
+#mix-list{
+  position: absolute;
+  top: -60px;
+}
+
+.navbar-toggle{
+  margin-top: 10px;
+}
+
+.navbar-brand{
+
+  padding: 12px 15px;
+
+  .name-wrapper{
+    position: relative;
+    text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.8);
+    font-size: 20px;
+    line-height: 29px;
+
+    .svg-m{
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 40px;
+      height: auto;
+      &.svg-logo-shadow{
+        opacity: 0.8;
+        top: 2px;
+        left: 4px;
+      }
+    }
+
+    .name-text{
+      margin-left: 48px;
+      letter-spacing: 1px;
+    }
+
+    .video-wrapper{
+      position: absolute;
+      top: -1px;
+      left: 13px;
+      z-index: -1;
+
+      video.name-waves{
+        max-width: 236px;
+      }
+    }
+  }//.name-wrapper
+}
+
+#mix{
+
+  height: 10px;
+  width: 100%;
+  top: 150px;
+  position: absolute;
+}
+
+section#waves
+{
+  // margin-top: 80px;
+  // margin-bottom: 160px;
+  position: relative;
+
+  .mixes-title{
+    position: absolute;
+    width: 100%;
+    top: 45%;
+    transform: translateY(-50%);
+
+    text-align: center;
+    margin-bottom: 0;
+  }
+
+  .wave-row{
+
+    width: 100%;
+    margin: 0;
+
+    .wave-wrapper{
+
+      overflow: hidden;
+      position: relative;
+
+      .wave-gradient{
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        left: 0;
+        top: 0;
+
+      }
+      .left-gradient{
+        /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#000000+0,000000+100&0+50,1+99 */
+        background: -moz-linear-gradient(left,  rgba(0,0,0,0) 0%, rgba(0,0,0,0) 30%, rgba(0,0,0,1) 99%, rgba(0,0,0,1) 100%); /* FF3.6-15 */
+        background: -webkit-linear-gradient(left,  rgba(0,0,0,0) 0%,rgba(0,0,0,0) 30%,rgba(0,0,0,1) 99%,rgba(0,0,0,1) 100%); /* Chrome10-25,Safari5.1-6 */
+        background: linear-gradient(to right,  rgba(0,0,0,0) 0%,rgba(0,0,0,0) 30%,rgba(0,0,0,1) 99%,rgba(0,0,0,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', endColorstr='#000000',GradientType=1 ); /* IE6-9 */
+
+      }
+      .right-gradient{
+        /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#000000+0,000000+100&1+0,0+50 */
+        background: -moz-linear-gradient(left,  rgba(0,0,0,1) 0%, rgba(0,0,0,0) 70%, rgba(0,0,0,0) 100%); /* FF3.6-15 */
+        background: -webkit-linear-gradient(left,  rgba(0,0,0,1) 0%,rgba(0,0,0,0) 70%,rgba(0,0,0,0) 100%); /* Chrome10-25,Safari5.1-6 */
+        background: linear-gradient(to right,  rgba(0,0,0,1) 0%,rgba(0,0,0,0) 70%,rgba(0,0,0,0) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#000000', endColorstr='#00000000',GradientType=1 ); /* IE6-9 */
+
+      }
+
+      video.section-waves{
+        width: 100% !important;
+        height: auto;
+
+        // position: relative;
+
+        &.left{
+          left: 3px;
+        }
+        &.right{
+          left: -3px;
+        }
+
+
+        &.rev{
+          -moz-transform: scaleX(-1);
+          -o-transform: scaleX(-1);
+          -webkit-transform: scaleX(-1);
+          transform: scaleX(-1);
+          filter: FlipH;
+          -ms-filter: "FlipH";
+        }
+      }
+    }
+  }
+
+}
+
+@media (min-width: 768px){
+
+  .intro .intro-body .brand-heading {
+    color: white;
+    font-size: 80px;
+  }
+}
+
+
+#mixes{
+
+  .mix-group{
+    &__title{
+      font-size: 13pt;
+      font-weight: normal;
+    }
+  }
+
+  h3{
+    margin-bottom: 10px;
+  }
+
+  p{
+    font-size: 12pt;
+    color: #ccc;
+    margin-bottom: 5px;
+  }
+
+  .ratings-bar {
+
+    overflow: hidden;
+    margin-top: 20px;
+    margin-bottom: 20px;
+
+    &.top-bar{
+      height: 1px;
+      opacity: 0.3;
+    }
+
+    &.bottom-bar{
+      margin-top: 70px;
+      margin-bottom: 0px;
+      height: 40px;
+
+       > div:hover{
+        .v-rating{
+          color: white;
+        }
+
+        .rating-block{
+          opacity: 1 !important;
+        }
+      }
+
+      > div{
+        cursor: pointer;
+      }
+
+      .rating-block{
+        opacity: 0.5;
+      }
+      .v-rating{
+        text-align: center;
+        letter-spacing: 2px;
+        color: #ddd;
+      }
+    }
+
+    .rating{
+      border-right: 1px solid black;
+    }
+    .rating-block{
+      height: 10px;
+      overflow: hidden;
+    }
+
+    .rating-block[data-rating="1"], .rating-bg[data-rating="1"] { background-color: $rating-1-color; }
+    .rating-block[data-rating="2"], .rating-bg[data-rating="2"] { background-color: $rating-2-color; }
+    .rating-block[data-rating="3"], .rating-bg[data-rating="3"] { background-color: $rating-3-color; }
+    .rating-block[data-rating="4"], .rating-bg[data-rating="4"] { background-color: $rating-4-color; }
+    .rating-block[data-rating="5"], .rating-bg[data-rating="5"] { background-color: $rating-5-color; }
+    .rating-block[data-rating="6"], .rating-bg[data-rating="6"] { background-color: $rating-6-color; }
+    .rating-block[data-rating="7"], .rating-bg[data-rating="7"] { background-color: $rating-7-color; }
+    .rating-block[data-rating="8"], .rating-bg[data-rating="8"] { background-color: $rating-8-color; }
+    .rating-block[data-rating="9"], .rating-bg[data-rating="9"] { background-color: $rating-9-color; }
+    .rating-block[data-rating="10"], .rating-bg[data-rating="10"] { background-color: $rating-10-color; }
+
+  }//ratings-bar
+
+  .v-descriptions{
+
+    height: 30px;
+
+    > p{
+      display: none;
+    }
+  }
+  .mix-group{
+    margin-top: 20px;
+  }
+
+  .calm{
+    text-align: left;
+    .intense-only{
+      display: none;
+    }
+  }
+
+  .intense{
+
+    text-align: right;
+
+    .mix{
+      text-align: right;
+
+      .audio-controls{
+        float: right;
+      }
+      .mix__details{
+        margin-right: 50px;
+        margin-left: 0;
+      }
+    }
+  }
+}
+
+// Animations for the pause button
+@-moz-keyframes spin { 100% { -moz-transform: rotate(360deg); } }
+@-webkit-keyframes spin { 100% { -webkit-transform: rotate(360deg); } }
+@keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }
+
+/* AUDIO PLAYER */
+.audio-player{
+
+  text-align: left;
+
+  text-transform: uppercase;
+  font-weight: 700;
+  letter-spacing: 1px;
+
+  margin-bottom: 40px;
+
+  h3{
+    margin-bottom: 10px;
+  }
+
+  &.playing{
+    .audio-controls{
+      .play-pause{
+        background-image: url(/img/mtnplayer/pause-button.png);
+
+        // -webkit-transform:  rotate(90deg);
+        // transform:          rotate(90deg);
+        // -moz-transform:     rotate(90deg);
+
+        -webkit-animation:spin 40s ease-in-out infinite;
+        -moz-animation:   spin 40s ease-in-out infinite;
+        animation:        spin 40s ease-in-out infinite;
+      }
+      &__background{
+        background-color: $playing-color;
+      }
+    }
+
+    .progress-bar{
+      background-color: #222;
+    }
+
+    .times{
+
+      display: block;
+
+      .current-time,.mix-length{
+        color: #eee;
+      }
+    }
+  }
+
+  .audio-controls{
+
+    width: 48px;
+    height: 48px;
+    margin-top: 0;
+    position: relative;
+    float: left;
+    overflow: hidden;
+
+    .play-pause, &__background{
+      position: absolute;
+      width: 100%;
+      height: 100%;
+    }
+
+    .play-pause{
+      cursor: pointer;
+      background: url(/img/mtnplayer/play-button.png) no-repeat;
+      background-size: cover;
+      outline: none;
+    }
+    &__background{
+      border-radius: 50%;
+      width: 95%;
+      height: 95%;
+      top: 1px;
+      left: 1px;
+      background-color: $primary-color;
+
+      // remove start-position when page loads to fade play button in.
+      transition: 4s background-color;
+      &.start-position{
+        background-color: black;
+      }
+    }
+  }
+
+  .progress-bar{
+    height: 2px;
+    width: 100%;
+    background-color: #000;
+
+    position: relative;
+
+    transition: 120ms all;
+
+    &.expanded{
+      height: 10px;
+      cursor: pointer;
+
+      .played{
+        background-color: #0f0;
+        border-right: 2px solid white;
+      }
+    }
+
+    .played, .buffer{
+      position: absolute;
+      height: 100%;
+
+      pointer-events: none;//don't capture events in JS
+    }
+
+    .played{
+      border-right: 0;
+      width: 0%;
+      background-color: #030;
+    }
+    .buffer{
+      background-color: #999;
+      width: 0%;
+    }
+  }
+
+  .times{
+
+    display: none;
+    margin-bottom: 10px;
+    margin-top: 5px;
+
+    .current-time,.mix-length{
+      color: #555;
+    }
+    .divider{
+      display: none;
+      color: #666;
+    }
+  }
+
+  .mix__details{
+
+    margin-left: 55px;
+
+    .h3,
+    .h5{
+      font-weight: normal;
+    }
+
+    .genres{
+      margin-top: 4px;
+    }
+
+    .date{
+      font-style: italic;
+      margin-right: 10px;
+    }
+
+    .rating{
+      cursor: pointer;
+    }
+
+    .downloads a{
+      color: $primary-subdued-color;
+    }
+
+    .fb-like{
+      opacity: 0.8;
+      margin-top: 5px;
+    }
+  }
+
+  // mix-ratings
+  .rating{
+    color: white;
+  }
+
+  &[data-rating="1"]  .rating{ color: $rating-1-color; }
+  &[data-rating="2"]  .rating{ color: $rating-2-color; }
+  &[data-rating="3"]  .rating{ color: $rating-3-color; }
+  &[data-rating="4"]  .rating{ color: $rating-4-color; }
+  &[data-rating="5"]  .rating{ color: $rating-5-color; }
+  &[data-rating="6"]  .rating{ color: $rating-6-color; }
+  &[data-rating="7"]  .rating{ color: $rating-7-color; }
+  &[data-rating="8"]  .rating{ color: $rating-8-color; }
+  &[data-rating="9"]  .rating{ color: $rating-9-color; }
+  &[data-rating="10"] .rating{ color: $rating-10-color; }
+}
+
+hr{
+  width: 69px;
+  margin-top: 20px;
+  margin-bottom: 40px;
+  border-top: 2px solid $progressive-color;
+}
+
+
+
+.no-gutter > [class*='col-'] {
+  padding-right:0;
+  padding-left:0;
+}
+
+
+// Hide the play button on the html5 video attribute on iphones!
+// This used to work for parent element of button divs */
+// But it is not enough now, below dont hide play button parent div
+*::-webkit-media-controls-panel {
+  display: none!important;
+  -webkit-appearance: none;
+}
+
+/* Old shadow dom for play button */
+*::--webkit-media-controls-play-button {
+  display: none!important;
+  -webkit-appearance: none;
+}
+
+/* New shadow dom for play button */
+
+/* This one works */
+*::-webkit-media-controls-start-playback-button {
+  display: none!important;
+  -webkit-appearance: none;
+}
