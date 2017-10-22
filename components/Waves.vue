@@ -18,13 +18,12 @@
 
 section#waves{
   position: relative;
-
+  margin-top: 60px;
   .mixes-title{
     position: absolute;
     width: 100%;
     top: 45%;
     transform: translateY(-50%);
-
     text-align: center;
     margin-bottom: 0;
   }
@@ -35,7 +34,6 @@ section#waves{
     .wave-wrapper{
       overflow: hidden;
       position: relative;
-
       .wave-gradient{
         position: absolute;
         width: 100%;

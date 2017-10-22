@@ -6,7 +6,7 @@
     Mixes
     About
     Contact
-    Footer
+    Foot
 </template>
 
 <script>
@@ -16,7 +16,7 @@ import Waves from '../components/Waves.vue';
 import Mixes from '../components/Mixes.vue';
 import About from '../components/About.vue';
 import Contact from '../components/Contact.vue';
-import Footer from '../components/Footer.vue';
+import Foot from '../components/Foot.vue';
 
 export default {
   components: {
@@ -26,7 +26,7 @@ export default {
     Mixes,
     About,
     Contact,
-    Footer,
+    Foot,
   },
 };
 </script>
@@ -150,24 +150,21 @@ hr{
 // Hide the play button on the html5 video attribute on iphones!
 // This used to work for parent element of button divs */
 // But it is not enough now, below dont hide play button parent div
-// *::-webkit-media-controls-panel {
-//   display: none!important;
-//   -webkit-appearance: none;
-// }
-
+::-webkit-media-controls-panel {
+  display: none!important;
+  -webkit-appearance: none;
+}
 /* Old shadow dom for play button */
-// *::--webkit-media-controls-play-button {
-//   display: none!important;
-//   -webkit-appearance: none;
-// }
-
+::--webkit-media-controls-play-button {
+  display: none!important;
+  -webkit-appearance: none;
+}
 /* New shadow dom for play button */
-
 /* This one works */
-// *::-webkit-media-controls-start-playback-button {
-//   display: none!important;
-//   -webkit-appearance: none;
-// }
+::-webkit-media-controls-start-playback-button {
+  display: none!important;
+  -webkit-appearance: none;
+}
 
 .content-section {
   padding-top: 200px;

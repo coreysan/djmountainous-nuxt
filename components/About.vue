@@ -9,6 +9,8 @@ section#about.content-section.text-center
           h2 About
           p Playing all sorts of bleeding edge EDM
           p From #[span.progressive deep house] to #[span.progressive trap] and from #[span.progressive tropical house] to #[span.progressive drum &amp; bass]
+          br
+          br
 
 </template>
 

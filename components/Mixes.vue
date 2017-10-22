@@ -7,24 +7,27 @@
         v-bind:class='mixGroup.label')
         h3.mix-group__title {{ mixGroup.name }}
           div.row.no-gutter.ratings-bar.top-bar
-            div.col-xs-2
-              div.rating.rating-block(
-                v-for='index in 5'
-                v-bind:data-rating='index+mixGroup.ratingAdd'
-                ) V{{ index+mixGroup.ratingAdd }}
+            div.col-xs-2.rating.rating-block(
+              v-for='index in 5'
+              v-bind:class="{'col-xs-offset-2': index === 1 && mixGroup.label === 'intense'}"
+              v-bind:data-rating='index+mixGroup.ratingAdd'
+              ) V{{ index+mixGroup.ratingAdd }}
 
         mix-group(:mixes='mixGroup.mixes')
 
     .row.no-gutter.ratings-bar.bottom-bar
       .col-xs-1(
         v-for='index in 10'
-        v-bind:class="{'col-xs-offset-1': isFirst(index)}")
+        v-on:mouseover='currentRatingHover = index'
+        v-on:mouseout='currentRatingHover = 0'
+        v-bind:class="{'col-xs-offset-1': index === 1}")
         .v-rating {{ index }}
         .rating.rating-block(v-bind:data-rating='index')
     .row
       .col-xs-10.col-xs-offset-1.v-descriptions
         p(v-for='index in 10'
-          v-bind:data-rating='index') {{ ratingDescription(index) }}
+          v-bind:data-rating='index'
+          v-if='index === currentRatingHover') {{ ratingDescription(index) }}
 </template>
 
 <script>
@@ -36,6 +39,7 @@ export default {
   },
   data() {
     return {
+      currentRatingHover: 0,
       mixGroups: [
         {
           name: 'Strolls',
@@ -126,11 +130,8 @@ export default {
     };
   },
   methods: {
-    isFirst(i) {
-      return i === 1;
-    },
-    ratingDescription(i) {
-      return this.ratingDescriptions[i];
+    ratingDescription(index) {
+      return this.ratingDescriptions[index];
     },
   },
 };
@@ -202,7 +203,7 @@ export default {
     }
 
     .rating-block{
-      height: 10px;
+      height: 25px;
       overflow: hidden;
     }
 
@@ -220,9 +221,7 @@ export default {
 
   .v-descriptions{
     height: 30px;
-    > p{
-      /* display: none; */
-    }
+    padding-top: 10px;
   }
   .mix-group{
     margin-top: 20px;

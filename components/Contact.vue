@@ -17,48 +17,52 @@
 
 <style lang="scss">
 @import '../assets/scss/_variables';
+#contact{
 
-.btn {
-  text-transform: uppercase;
-  font-family: "Montserrat","Helvetica Neue",Helvetica,Arial,sans-serif;
-  font-weight: 400;
-  -webkit-transition: all .3s ease-in-out;
-  -moz-transition: all .3s ease-in-out;
-  transition: all .3s ease-in-out;
-  border-radius: 0;
-}
+  padding-top: 100px;
 
-.btn-default {
-  border: 1px solid $primary;
-  color: $primary;
-  background-color: transparent;
-  &:hover,
-  &:focus {
+  .btn {
+    text-transform: uppercase;
+    font-family: "Montserrat","Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-weight: 400;
+    -webkit-transition: all .3s ease-in-out;
+    -moz-transition: all .3s ease-in-out;
+    transition: all .3s ease-in-out;
+    border-radius: 0;
+  }
+
+  .btn-default {
     border: 1px solid $primary;
-    outline: none;
-    color: black;
-    background-color: $primary;
-  }
-}
-
-ul.banner-social-buttons {
-  margin-top: 0;
-  margin-bottom: 10px;
-
-  li{
-    margin-bottom: 16px;
+    color: $primary;
+    background-color: transparent;
+    &:hover,
+    &:focus {
+      border: 1px solid $primary;
+      outline: none;
+      color: black;
+      background-color: $primary;
+    }
   }
 
-  @media(max-width:1199px) {
-      margin-top: 15px;
-  }
-  @media(max-width:1000px) {
-    li {
-      display: block;
-      margin-bottom: 20px;
-      padding: 0;
-      &:last-child {
-          margin-bottom: 0;
+  ul.banner-social-buttons {
+    margin-top: 0;
+    margin-bottom: 10px;
+
+    li{
+      margin-bottom: 16px;
+    }
+
+    @media(max-width:1199px) {
+        margin-top: 15px;
+    }
+    @media(max-width:1000px) {
+      li {
+        display: block;
+        margin-bottom: 20px;
+        padding: 0;
+        &:last-child {
+            margin-bottom: 0;
+        }
       }
     }
   }

@@ -95,9 +95,9 @@ export default {
       .play-pause{
         background-image: url(/imgs/mtnplayer/pause-button.png);
 
-        // -webkit-transform:  rotate(90deg);
-        // transform:          rotate(90deg);
-        // -moz-transform:     rotate(90deg);
+        /* -webkit-transform:  rotate(90deg); */
+        /* transform:          rotate(90deg); */
+        /* -moz-transform:     rotate(90deg); */
 
         -webkit-animation:spin 40s ease-in-out infinite;
         -moz-animation:   spin 40s ease-in-out infinite;
@@ -147,11 +147,10 @@ export default {
       top: 1px;
       left: 1px;
       background-color: $primary-color;
-
-      // remove start-position when page loads to fade play button in.
+      /* remove start-position when page loads to fade play button in. */
       transition: 4s background-color;
       &.start-position{
-        background-color: black;
+        /* background-color: black; */
       }
     }
   }
@@ -162,7 +161,6 @@ export default {
     background-color: #000;
     position: relative;
     transition: 120ms all;
-
     &.expanded{
       height: 10px;
       cursor: pointer;
