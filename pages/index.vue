@@ -4,6 +4,9 @@
     Hero
     Waves
     Mixes
+    About
+    Contact
+    Footer
 </template>
 
 <script>
@@ -11,6 +14,9 @@ import Navigation from '../components/Navigation.vue';
 import Hero from '../components/Hero.vue';
 import Waves from '../components/Waves.vue';
 import Mixes from '../components/Mixes.vue';
+import About from '../components/About.vue';
+import Contact from '../components/Contact.vue';
+import Footer from '../components/Footer.vue';
 
 export default {
   components: {
@@ -18,6 +24,9 @@ export default {
     Hero,
     Waves,
     Mixes,
+    About,
+    Contact,
+    Footer,
   },
 };
 </script>
@@ -83,15 +92,92 @@ a {
   }
 }
 
+
+/* SNIPPETS */
 .light {
   font-weight: 400;
 }
+.deep-house{
+  color: $deep-house-color;
+}
+.progressive{
+  color: $progressive-color;
+}
+.drum-bass{
+  color: $drum-bass-color;
+}
+.dreamstep{
+  color: $dreamstep-color;
+}
+.subdued{
+  color: #999;
+}
+.more-subdued{
+  color: #bbb;
+}
+.way-subdued{
+  color: $way-subdued;
+}
+
+::-moz-selection {
+    text-shadow: none;
+    background: #fcfcfc;
+    background: rgba(white, 0.2);
+}
+
+::selection {
+    text-shadow: none;
+    background: #fcfcfc;
+    background: rgba(white, 0.2);
+}
+
+img::selection {
+    background: transparent;
+}
+
+img::-moz-selection {
+    background: transparent;
+}
+
+hr{
+  width: 69px;
+  margin-top: 20px;
+  margin-bottom: 40px;
+  border-top: 2px solid $progressive-color;
+}
+
+// TODO CS - move this to mixes next to play buttons?
+// Hide the play button on the html5 video attribute on iphones!
+// This used to work for parent element of button divs */
+// But it is not enough now, below dont hide play button parent div
+// *::-webkit-media-controls-panel {
+//   display: none!important;
+//   -webkit-appearance: none;
+// }
+
+/* Old shadow dom for play button */
+// *::--webkit-media-controls-play-button {
+//   display: none!important;
+//   -webkit-appearance: none;
+// }
+
+/* New shadow dom for play button */
+
+/* This one works */
+// *::-webkit-media-controls-start-playback-button {
+//   display: none!important;
+//   -webkit-appearance: none;
+// }
 
 .content-section {
   padding-top: 200px;
   &#mixes{
     padding-top: 40px;
   }
+}
+
+header .section-gradient{
+  height: 140px;
 }
 
 .section-gradient{
@@ -116,6 +202,12 @@ a {
 .no-gutter > [class*='col-'] {
   padding-right:0;
   padding-left:0;
+}
+
+@media(min-width:767px) {
+  .content-section {
+      padding-top: 250px;
+  }
 }
 
 </style>
