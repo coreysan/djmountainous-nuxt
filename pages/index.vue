@@ -7,6 +7,7 @@
     About
     Contact
     Foot
+    GlobalAudioPlayer
 </template>
 
 <script>
@@ -17,6 +18,7 @@ import Mixes from '../components/Mixes.vue';
 import About from '../components/About.vue';
 import Contact from '../components/Contact.vue';
 import Foot from '../components/Foot.vue';
+import GlobalAudioPlayer from '../components/GlobalAudioPlayer.vue';
 
 export default {
   components: {
@@ -27,6 +29,7 @@ export default {
     About,
     Contact,
     Foot,
+    GlobalAudioPlayer,
   },
 };
 </script>

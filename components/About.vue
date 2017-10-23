@@ -33,6 +33,10 @@ section#about.content-section.text-center
   .inside-about{
     padding: 80px 0;
   }
+
+  .progressive {
+    font-style: italic;
+  }
 }
 
 @media(min-width:767px) {

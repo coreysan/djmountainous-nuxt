@@ -1,10 +1,6 @@
 <template lang="pug">
 div
-  section.mix.audio-player(
-    v-for='mix in mixes'
-    v-bind:id='mix.slug'
-    v-bind:class='mix.slug'
-    v-bind:data-rating='mix.rating')
+  section.mix.audio-player()
     h3 {{ mix.title }}
 
     .row.no-gutter
@@ -13,6 +9,7 @@ div
         .progress-bar.rating-bg
           .buffer
           .played
+
     .times
       span.current-time
       span.divider
@@ -20,7 +17,7 @@ div
 
     .audio-controls
       .audio-controls__background.start-position
-      .play-pause
+      .play-pause(@click='playPause()')
 
     .mix__details
       .genres.progressive #[span.rating(v-bind:data-rating='mix.rating') V{{ mix.rating }}] {{ mix.genres }}
@@ -28,9 +25,9 @@ div
         span.date.way-subdued {{ mix.date }}
         span.downloads
           a.download(download
-            v-bind:href="audioFilePath(mix.slug, 'mp3')") mp3
+            v-bind:href="audioFilePath('mp3')") mp3
       div.fb-like(
-            v-bind:data-href='mixLink(mix.slug)'
+            v-bind:data-href='mixLink'
             data-width='300'
             data-layout='button'
             data-action='like'
@@ -38,19 +35,19 @@ div
             data-size='small'
             data-show-faces='true'
             data-share='true')
-    audio
-      source(type='audio/m4a'
-        v-bind:src="audioFilePath(mix.slug, 'm4a')")
-      source(type='audio/mpeg'
-        v-bind:src="audioFilePath(mix.slug, 'mp3')")
+
+    //- audio
+    //-   source(type='audio/m4a'
+    //-     v-bind:src="audioFilePath('m4a')")
+    //-   source(type='audio/mpeg'
+    //-     v-bind:src="audioFilePath('mp3')")
 </template>
 
 <script>
-
 export default {
   props: {
-    mixes: {
-      type: Array,
+    mix: {
+      type: Object,
       required: true,
     },
   },
@@ -59,18 +56,28 @@ export default {
       baseUrl: process.env.baseUrl,
     };
   },
-  methods: {
-    audioFilePath(slug, ext) {
-      return `${this.baseUrl}/mixes/dj-mountainous-${slug}.${ext}`;
+  computed: {
+    mixLink() {
+      return `${this.baseUrl}/?${this.mix.slug}#mix`;
     },
-    mixLink(slug) {
-      return `${this.baseUrl}/?${slug}#mix`;
+    audio() {
+      return document.getElementsByTagName('audio');
+    },
+  },
+  methods: {
+    audioFilePath(ext) {
+      return `${this.baseUrl}/mixes/dj-mountainous-${this.mix.slug}.${ext}`;
+    },
+    playPause(event) {
+      console.log('PlayPause');
+      debugger;
+      this.$emit('playPause');
     },
   },
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 @import '../assets/scss/_variables';
 
  /* Animations for the pause button */

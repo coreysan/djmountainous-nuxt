@@ -20,4 +20,3 @@ For detailed explanation on how things work, checkout the [Nuxt.js docs](https:/
 ## *Removed Folders*
 Removed these folders cause they're not a priority right now:
 - /middleware
-- /store

@@ -14,7 +14,7 @@
       h2.mixes-title Mixes
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
 
 section#waves{
   position: relative;

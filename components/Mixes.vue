@@ -1,28 +1,41 @@
 <template lang="pug">
 
   #mixes.container.content-section.text-center
+
+    section.mix-group.col-sm-6.col-sm-offset-0.col-xs-10.col-xs-offset-1(
+      v-for='mixGroup in mixGroups'
+      v-bind:class='mixGroup.label')
+
+      h3.mix-group__title {{ mixGroup.name }}
+
+      .row.no-gutter.ratings-bar.top-bar
+        .rating-wrapper(
+          v-for='index in 5')
+          .rating.rating-block(
+            v-bind:data-rating='index+mixGroup.ratingAdd'
+            v-bind:class="{'lit': isLit(index)}")
+
     .row
-      section.mix-group.col-md-5.col-md-offset-1.col-sm-6.col-sm-offset-0.col-xs-10.col-xs-offset-1(
+      section.mix-group.col-sm-6.col-sm-offset-0.col-xs-10.col-xs-offset-1(
         v-for='mixGroup in mixGroups'
         v-bind:class='mixGroup.label')
-        h3.mix-group__title {{ mixGroup.name }}
-          div.row.no-gutter.ratings-bar.top-bar
-            div.col-xs-2.rating.rating-block(
-              v-for='index in 5'
-              v-bind:class="{'col-xs-offset-2': index === 1 && mixGroup.label === 'intense'}"
-              v-bind:data-rating='index+mixGroup.ratingAdd'
-              ) V{{ index+mixGroup.ratingAdd }}
 
-        mix-group(:mixes='mixGroup.mixes')
+        audio-player(
+          v-for='mix in mixGroup.mixes'
+          v-bind:mix='mix'
+          v-bind:id='mix.slug'
+          v-bind:class='mix.slug')
 
     .row.no-gutter.ratings-bar.bottom-bar
-      .col-xs-1(
+      .rating-wrapper(
         v-for='index in 10'
         v-on:mouseover='currentRatingHover = index'
-        v-on:mouseout='currentRatingHover = 0'
-        v-bind:class="{'col-xs-offset-1': index === 1}")
+        v-on:mouseout='currentRatingHover = 0')
         .v-rating {{ index }}
-        .rating.rating-block(v-bind:data-rating='index')
+        .rating.rating-block(
+          v-bind:data-rating='index'
+          v-bind:class="{'lit': isLit(index)}")
+
     .row
       .col-xs-10.col-xs-offset-1.v-descriptions
         p(v-for='index in 10'
@@ -31,15 +44,21 @@
 </template>
 
 <script>
-import MixGroup from '../components/MixGroup.vue';
+import AudioPlayer from '../components/AudioPlayer.vue';
+
+const TARGET_BPM = 124;
+
+// 60s / 124bpm * 1000 = 480ms / beat
+const MS_PER_BEAT = (60 / TARGET_BPM) * 1000;
 
 export default {
   components: {
-    'mix-group': MixGroup,
+    'audio-player': AudioPlayer,
   },
   data() {
     return {
       currentRatingHover: 0,
+      highlightedRatingCells: [],
       mixGroups: [
         {
           name: 'Strolls',
@@ -129,7 +148,31 @@ export default {
       ],
     };
   },
+  created() {
+    this.lightRatingCells();
+  },
   methods: {
+    lightRatingCells() {
+      setTimeout(() => {
+        this.highlightedRatingCells = [];
+        for (let i = 0; i < this.numberOfCellsToHighlight(); i++) {
+          this.highlightedRatingCells
+            .push(this.randomRatingCell());
+        }
+        this.lightRatingCells();
+      }, MS_PER_BEAT);
+    },
+    numberOfCellsToHighlight() {
+      return Math.floor((
+        (Math.random() * this.ratingDescriptions.length) / 2
+      ) + 2);
+    },
+    randomRatingCell() {
+      return Math.floor(Math.random() * this.ratingDescriptions.length);
+    },
+    isLit(index) {
+      return this.highlightedRatingCells.indexOf(index) !== -1;
+    },
     ratingDescription(index) {
       return this.ratingDescriptions[index];
     },
@@ -163,10 +206,23 @@ export default {
     overflow: hidden;
     margin-top: 20px;
     margin-bottom: 20px;
+    display: flex;
+
+    .rating-wrapper{
+      flex-grow: 1;
+      .rating-block{
+        opacity: 0.4;
+        &.lit {
+          opacity: 0.5;
+        }
+      }
+    }
 
     &.top-bar{
-      height: 1px;
+      height: 2px;
       opacity: 0.3;
+      margin-top: 30px;
+      margin-bottom: 50px;
     }
 
     &.bottom-bar{
@@ -180,7 +236,7 @@ export default {
         }
 
         .rating-block{
-          opacity: 1 !important;
+          opacity: 1;
         }
       }
 
@@ -188,9 +244,6 @@ export default {
         cursor: pointer;
       }
 
-      .rating-block{
-        opacity: 0.5;
-      }
       .v-rating{
         text-align: center;
         letter-spacing: 2px;
