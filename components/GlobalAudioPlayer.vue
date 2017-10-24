@@ -1,23 +1,23 @@
 <template lang="pug">
 
-  section.audio-player
-    .row
-      .col-xs-3
-        .now-playing {{ playingText }}
-      .col-xs-9
-        .play(@click="playPause()")
-        .mix
-          .info
-            span.title {{ currentMix.title }}
-            span.genres {{ currentMix.genres }}
-            span.date {{ currentMix.date }}
-          #progress(@click='seek')
-            #seeker
-
+section.audio-player
+  .now-playing {{ playingText }}
+  .play(
+    @click="playPause()"
+    v-bind:class='{playing: isPlaying}')
+  .mix
+    .info
+      span.title {{ currentMix.title }}
+      span.v-rating V{{ currentMix.rating }}
+      span.genres {{ currentMix.genres }}
+      span.date {{ currentMix.date }}
+    #progress(@click='seek')
+      #seeker
+    .times {{ currentTime }}
 
     audio#global-audio-player(ref='player')
-      source(type='audio/m4a' v-bind:src='currentM4a')
-      source(type='audio/mpeg' v-bind:src='currentMp3')
+      source.m4a(type='audio/m4a' v-bind:src='currentM4a')
+      source.mp3(type='audio/mpeg' v-bind:src='currentMp3')
 
 </template>
 
@@ -33,8 +33,10 @@ export default {
   },
   computed: {
     ...mapGetters([
+      'isPlaying',
       'playingText',
       'seekPercentage',
+      'currentTime',
       'currentMix',
       'currentMp3',
       'currentM4a',
@@ -48,6 +50,7 @@ export default {
     ...mapMutations([
       'initialize',
       'seekTo',
+      'recalculateSeek',
     ]),
     ...mapActions([
       'playPause',
@@ -59,14 +62,15 @@ export default {
     },
     updateSeeker() {
       setInterval(() => {
+        this.recalculateSeek();
         this.moveSeek();
-        console.log('Moving seek');
-      }, 1000);
+      }, 500);
     },
     moveSeek() {
       const $seeker = document.getElementById('seeker');
       const progressWidth = document.getElementById('progress').offsetWidth;
-      $seeker.style.left = `${(progressWidth * this.seekPercentage)}px`;
+      const seekPx = Math.floor(progressWidth * this.seekPercentage);
+      $seeker.style.left = `${seekPx}px`;
     },
   },
 };
@@ -76,14 +80,33 @@ export default {
 @import '../assets/scss/_variables';
 
 .audio-player{
+  display: flex;
+  flex-wrap: nowrap;
+
+  > *{
+    align-self: center;
+  }
+
+  .now-playing{
+    width:  100px;
+  }
+  .play{
+    width:  65px;
+  }
+  .mix{
+    flex-grow: 1;
+  }
+}
+
+.audio-player{
   position: fixed;
   bottom: 0;
   left: 0;
   right: 0;
   margin-bottom: 0;
-  padding-top: 10px;
-  height: 80px;
+  padding: 10px 0;
   width: 100%;
+  display: flex;
   background-color: black;
   border-top: 1px solid $primary-color;
   .now-playing {
@@ -98,22 +121,36 @@ export default {
   .play {
     height:  60px;
     width:  60px;
-    background-color: red;
+    /* background-color:  */
+    background: $primary-color url(/imgs/mtnplayer/play-button.png) no-repeat;
+    background-size: cover;
+    outline: none;
     cursor: pointer;
-    float: left;
+    /* float: left; */
+    &.playing{
+      background-color: $playing-color;
+        -webkit-animation:spin 40s ease-in-out infinite;
+        -moz-animation:   spin 40s ease-in-out infinite;
+        animation:        spin 40s ease-in-out infinite;
+    }
   }
   .mix{
-    margin-left:  100px;
+    margin-left:  15px;
     .info{
       .title {
         text-transform: uppercase;
+        font-size:  14pt;
+      }
+      .genres, .v-rating, .date{
+        padding-left: 10px;
+      }
+      .v-rating{
+        font-weight: bold;
       }
       .genres {
-        padding-left: 10px;
         color: $subdued;
       }
       .date{
-        padding-left: 10px;
         font-style: italic;
         color: $less-subdued;
       }
@@ -130,7 +167,8 @@ export default {
         width: 100%;
         pointer-events:  none;
         height:  100px; // arbitrary high val
-        border-left: inset 5px solid white;
+        border-left: 1px solid white;
+        background-color:  #181818;
       }
     }
   }

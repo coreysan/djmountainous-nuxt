@@ -17,7 +17,7 @@ div
 
     .audio-controls
       .audio-controls__background.start-position
-      .play-pause(@click='playPause()')
+      .play-pause(@click='play(mix)')
 
     .mix__details
       .genres.progressive #[span.rating(v-bind:data-rating='mix.rating') V{{ mix.rating }}] {{ mix.genres }}
@@ -35,15 +35,11 @@ div
             data-size='small'
             data-show-faces='true'
             data-share='true')
-
-    //- audio
-    //-   source(type='audio/m4a'
-    //-     v-bind:src="audioFilePath('m4a')")
-    //-   source(type='audio/mpeg'
-    //-     v-bind:src="audioFilePath('mp3')")
 </template>
 
 <script>
+import { mapGetters, mapMutations, mapActions } from 'vuex';
+
 export default {
   props: {
     mix: {
@@ -65,13 +61,11 @@ export default {
     },
   },
   methods: {
+    ...mapMutations([
+      'play',
+    ]),
     audioFilePath(ext) {
       return `${this.baseUrl}/mixes/dj-mountainous-${this.mix.slug}.${ext}`;
-    },
-    playPause(event) {
-      console.log('PlayPause');
-      debugger;
-      this.$emit('playPause');
     },
   },
 };
@@ -83,7 +77,11 @@ export default {
  /* Animations for the pause button */
 @-moz-keyframes spin { 100% { -moz-transform: rotate(360deg); } }
 @-webkit-keyframes spin { 100% { -webkit-transform: rotate(360deg); } }
-@keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }
+@keyframes spin { 100% {
+    -webkit-transform: rotate(360deg);
+    transform:rotate(360deg);
+  }
+}
 
 /* AUDIO PLAYER */
 .audio-player{

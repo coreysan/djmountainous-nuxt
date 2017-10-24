@@ -1,7 +1,7 @@
 <template lang="pug">
   section#contact.container.content-section.text-center
     h2 Contact
-    p Chat with me to book a party
+    p Time to book a party?
     p
       a(href="tel:6046524660") 604-652-4660
     ul.list-inline.banner-social-buttons
